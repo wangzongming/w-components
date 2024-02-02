@@ -1,0 +1,53 @@
+.w-record{ 
+	font-size: 20rpx;
+	color: #888;
+	text-align: center;
+}
+
+.wc-btn{ 
+	width: 90rpx;
+	height: 90rpx; 
+	border-radius: 50%;
+	display: inline-block; 
+	box-shadow: 2px 2px 5px rgba(194, 194, 193, 0.856);   
+	position: relative;
+}
+.wc-btn-hover{ 
+	transition: 0.1s;
+	box-shadow: 2px 2px 5px rgba(160, 159, 159, 0.856);   
+}
+
+.wc-btn.reset,
+.wc-btn.stop{
+	margin-left: 100rpx;
+}
+.wc-btn .icon-container{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.wc-btn .text-contaienr{
+	padding-top: 12rpx;
+}
+.wc-btn  .icon-container image{
+	width: 60%;
+	height: 60%;
+	display: inline-block;
+}
+
+.time-canvas{ 
+	width: 90rpx;
+	height: 90rpx; 
+	position: absolute; 
+
+	/* border: 1px solid rgba(255, 0, 0, 0.212);
+	width: 200rpx;
+	height: 200rpx;  */
+	
+	/* left: -5rpx;
+	top: -5rpx; */
+	border-radius: 50%;
+	box-sizing: border-box; 
+}

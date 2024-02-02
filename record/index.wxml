@@ -1,0 +1,87 @@
+<view class="w-record">
+	<!-- 开始录音按钮 -->
+	<view bind:tap="start" class="wc-btn start" hover-class="wc-btn-hover" style="background: {{_btnBgs.start}}" wx:if="{{recordStatus == 'ready'}}">
+		<view class="icon-container">
+			<image src="./imgs/voice.svg" alt="" />
+		</view>
+		<view class="text-contaienr">
+			{{_text.start}}
+		</view>
+	</view>
+
+	<!-- <canvas type="2d" id="time-canvas" class="time-canvas"></canvas> -->
+
+	<!-- 暂停录音按钮 -->
+	<view bind:tap="pause" class="wc-btn pause" hover-class="wc-btn-hover" style="background: {{_btnBgs.pause}}" wx:if="{{recordStatus == 'ing'}}">
+		<!-- 进度条 -->
+		<canvas type="2d" id="time-canvas" class="time-canvas"></canvas>
+
+		<view class="icon-container">
+			<image src="./imgs/pause.svg" alt="" />
+		</view>
+		<view class="text-contaienr">
+			{{recordedMsText}}
+		</view>
+	</view>
+
+	<!-- 继续录音按钮 -->
+	<view bind:tap="continue" class="wc-btn continue" hover-class="wc-btn-hover" style="background: {{_btnBgs.continue}}" wx:if="{{recordStatus == 'pause'}}">
+		<view class="icon-container">
+			<image src="./imgs/play.svg" alt="" />
+		</view>
+		<view class="text-contaienr">
+			{{_text.continue}}
+		</view>
+	</view>
+
+	<!-- 结束录音按钮 -->
+	<view bind:tap="stop" class="wc-btn stop" hover-class="wc-btn-hover" style="background: {{_btnBgs.stop}}" wx:if="{{recordStatus == 'ing' || recordStatus == 'pause'}}">
+		<view class="icon-container">
+			<image src="./imgs/stop.svg" alt="" />
+		</view>
+		<view class="text-contaienr">
+			{{_text.stop}}
+		</view>
+	</view>
+
+	<!-- 回放录音按钮 -->
+	<view bind:tap="play" class="wc-btn play" hover-class="wc-btn-hover" style="background: {{_btnBgs.play}}" wx:if="{{recordStatus == 'stop' && playStatus === 'ready'}}">
+		<view class="icon-container">
+			<image src="./imgs/play_whire.svg" alt="" />
+		</view>
+		<view class="text-contaienr">
+			{{_text.play}}
+		</view>
+	</view>
+
+	<!-- 回放暂停按钮 -->
+	<view bind:tap="playPause" class="wc-btn play" hover-class="wc-btn-hover" style="background: {{_btnBgs.play}}" wx:if="{{recordStatus == 'stop' &&  playStatus === 'ing'}}">
+		<view class="icon-container">
+			<image src="./imgs/pause_whire.svg" alt="" />
+		</view>
+		<view class="text-contaienr">
+			{{_text.playPause}}
+		</view>
+	</view>
+
+	<!-- 回放继续按钮 -->
+	<view bind:tap="playResume" class="wc-btn play" hover-class="wc-btn-hover" style="background: {{_btnBgs.play}}" wx:if="{{recordStatus == 'stop'  && playStatus === 'pause'}}">
+		<view class="icon-container">
+			<image src="./imgs/play_whire.svg" alt="" />
+		</view>
+		<view class="text-contaienr">
+			{{_text.playContinue || " "}}
+		</view>
+	</view>
+
+
+	<!-- 重录录音按钮 -->
+	<view bind:tap="reset" class="wc-btn reset" hover-class="wc-btn-hover" style="background: {{_btnBgs.reset}}" wx:if="{{recordStatus == 'stop'}}">
+		<view class="icon-container">
+			<image src="./imgs/redo.svg" alt="" />
+		</view>
+		<view class="text-contaienr">
+			{{_text.reset}}
+		</view>
+	</view>
+</view>
