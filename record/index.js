@@ -8,7 +8,7 @@
  		// 文本
  		texts: Object,
  		// 按钮背景颜色
- 		btnBgs: Object, 
+ 		btnBgs: Object,
  	},
 
  	/**
@@ -141,7 +141,7 @@
  			recorderManager.onError(({
  				errMsg
  			}) => {
- 				// console.log('recorder error', errMsg)
+ 				console.log('recorder error', errMsg)
  				wx.showToast({
  					icon: "error",
  					duration: 5000,
@@ -191,7 +191,7 @@
  			// console.log('重录')
  			this.start()
  			// 触发重录回调
- 			this.triggerEvent('onResume', { })
+ 			this.triggerEvent('onResume', {})
  		},
 
  		// 计时
@@ -333,9 +333,12 @@
  			})
  		},
  		detached() {
+ 			// console.log(wx.getRecorderManager())
  			// 在组件实例被从页面节点树移除时执行
  			this.audioIns && this.audioIns.stop();
- 			this.recorderManager && this.recorderManager.stop();
+ 			if (this.data.recordStatus === "ing" || this.data.recordStatus === "pause") {
+ 				this.recorderManager && this.recorderManager.stop();
+ 			}
  		},
  	},
 
