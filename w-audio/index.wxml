@@ -1,0 +1,58 @@
+<view class="w-audio" style="background: {{_mainColor}};">
+	<!-- 海报 -->
+	<view class="poster" hidden="{{!poster}}">
+		<image src="{{poster}}" />
+	</view>
+
+	<!-- 进度条等播放信息 -->
+	<view class="infos">
+		<view class="desc">{{desc}}</view>
+		<view>
+			<slider disabled="{{playStatus === 'loading'}}" value="{{curTime}}" bindchange="sliderChange" min="0" max="{{duration}}" block-size="16" selected-color="#fff" backgroundColor="#ccc" />
+		</view>
+		<view class="time"> 
+			{{curTimeText}}/{{durationText}}
+		</view>
+	</view>
+
+	<!-- 控制按钮 -->
+	<view class="btns">
+		<!-- loading -->
+		<view class="wc-btn loading" hover-class="wc-btn-hover" style="background: {{_btnBgs.play}}" wx:if="{{ playStatus === 'loading' || onWaiting}}">
+			<view class="icon-container">
+				<image src="./imgs/loading.svg" alt="" />
+			</view>
+		</view>
+
+		<!-- 播放按钮 -->
+		<view bind:tap="play" class="wc-btn play" hover-class="wc-btn-hover" style="background: {{_btnBgs.play}}" wx:if="{{ playStatus === 'ready' && !onWaiting}}">
+			<view class="icon-container">
+				<image src="./imgs/play.svg" alt="" />
+			</view>
+		</view>
+
+		<!-- 暂停按钮 -->
+		<view bind:tap="playPause" class="wc-btn play" hover-class="wc-btn-hover" style="background: {{_btnBgs.play}}" wx:if="{{playStatus === 'ing' && !onWaiting}}">
+			<view class="icon-container">
+				<image src="./imgs/pause.svg" alt="" />
+			</view>
+		</view>
+
+		<!-- 继续按钮 -->
+		<view bind:tap="playResume" class="wc-btn play" hover-class="wc-btn-hover" style="background: {{_btnBgs.play}}" wx:if="{{playStatus === 'pause' && !onWaiting}}">
+			<view class="icon-container">
+				<image src="./imgs/play.svg" alt="" />
+			</view>
+		</view>
+
+		<!-- 倍速按钮 -->
+		<view  class="wc-btn speed" hover-class="wc-btn-hover" style="background: {{_btnBgs.play}};color:{{_mainColor}}" wx:if="{{playStatus !== 'loading'}}">
+			<picker bindchange="playbackRate" value="{{speedIndex}}" range="{{speedArray}}">
+				<view class="picker">
+					{{speedArray[speedIndex]}}X
+				</view>
+			</picker>
+		</view>
+	</view>
+
+</view>
