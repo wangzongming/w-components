@@ -90,7 +90,7 @@
  			let innerAudioContext;
  			return {
  				init() {
- 					console.log('播放', _this.data.src)
+ 					// console.log('播放', _this.data.src)
  					innerAudioContext = wx.createInnerAudioContext({
  						useWebAudioImplement: true // 是否使用 WebAudio 作为底层音频驱动，默认关闭。对于短音频、播放频繁的音频建议开启此选项，开启后将获得更优的性能表现。由于开启此选项后也会带来一定的内存增长，因此对于长音频建议关闭此选项
  					})
@@ -114,7 +114,7 @@
  					})
  					// 是否可以进入播放状态
  					innerAudioContext.onCanplay(() => {
- 						console.log('onCanplay')
+ 						// console.log('onCanplay')
  						innerAudioContext.volume = 0.9;
  						// 这个事件在拖动进度条也会触发，所以需要注意
  						if (_this.data.playStatus === "loading") {
@@ -134,13 +134,13 @@
  							onWaiting: false,
  							playStatus: "ing",
  						})
- 						console.log('onPlay')
+ 						// console.log('onPlay')
  					})
  					// 进度更新
  					innerAudioContext.onTimeUpdate(() => {
  						// 当前播放位置
  						const currentTime = parseInt(innerAudioContext.currentTime || 0);
- 						console.log("currentTime", currentTime)
+ 						// console.log("currentTime", currentTime)
  						let curSTime = parseInt(currentTime % 60);
  						if (curSTime < 10) {
  							curSTime = `0${curSTime}`
@@ -178,7 +178,7 @@
  					// 	// innerAudioContext.play(); 
  					// })
  					innerAudioContext.onWaiting(() => {
- 						console.log('加载资源中')
+ 						// console.log('加载资源中')
  						innerAudioContext.pause();
 
  						_this.setData({
@@ -255,8 +255,8 @@
  				mixWithOther: true, 
  				obeyMuteSwitch: false, 
  				success: function (e) { 
- 					console.log(e) 
- 					console.log('play success') 
+ 					// console.log(e) 
+ 					// console.log('play success') 
  				},
 
  				fail: function (e) { 
