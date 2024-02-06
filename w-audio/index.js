@@ -69,6 +69,9 @@
  		async playPause() {
  			this.audioIns.pause();
  		},
+ 		async stop() {
+ 			this.audioIns.stop();
+ 		},
  		async playResume() {
  			this.audioIns.resume();
  		},
