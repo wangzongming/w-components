@@ -98,6 +98,62 @@
  			}
 
  			const recorderManager = wx.getRecorderManager()
+ 			const options = {
+ 				...this.data._recorderManagerOptions
+ 			}
+ 			wx.authorize({
+ 				scope: 'scope.record',
+ 				success(res) {
+ 					console.log("录音授权成功", res);
+ 					// 用户已经同意小程序使用录音功能，后续调用recorderManager.start 接口不会弹窗询问
+ 					recorderManager.start(options); //使用新版录音接口，可以获取录音文件
+ 				},
+ 				fail() {
+ 					console.log("第一次录音授权失败");
+ 					wx.showModal({
+ 						title: '提示',
+ 						content: '您未授权录音，功能将无法使用',
+ 						showCancel: true,
+ 						confirmText: "授权",
+ 						confirmColor: "#AF1F25",
+ 						success(res) {
+ 							if (res.confirm) {
+ 								//确认则打开设置页面（自动切到设置页）
+ 								wx.openSetting({
+ 									success: (res) => {
+ 										console.log(res.authSetting);
+ 										if (!res.authSetting['scope.record']) {
+ 											//未设置录音授权
+ 											console.log("未设置录音授权");
+ 											wx.showModal({
+ 												title: '提示',
+ 												content: '您未授权录音，功能将无法使用', // 可以自己编辑
+ 												showCancel: false,
+ 												success: function (res) {
+ 													console.log("不知道打印的啥？")
+ 												},
+ 											})
+ 										} else {
+ 											//第二次才成功授权
+ 											console.log("设置录音授权成功");
+ 											recorderManager.start(options);
+ 										}
+ 									},
+ 									fail: function () {
+ 										console.log("授权设置录音失败");
+ 									}
+ 								})
+ 							} else if (res.cancel) {
+ 								console.log("cancel");
+ 							}
+ 						},
+ 						fail() {
+ 							console.log("openfail");
+ 						}
+ 					})
+ 				}
+ 			})
+
  			recorderManager.onStart(() => {
  				// console.log('recorder start')
  				startedFn();
@@ -149,10 +205,7 @@
  				})
  			})
 
- 			const options = {
- 				...this.data._recorderManagerOptions
- 			}
- 			recorderManager.start(options)
+
  			this.recorderManager = recorderManager;
  		},
  		// 暂停录音
