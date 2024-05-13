@@ -176,4 +176,7 @@ onResume    重录回调
  	// 停止
 	wAudio.stop(); 
 
-	  
+
+## 微信交流群 
+
+<img src="http://img.xiaomingio.top/i/2024/05/13/6641f99345733.jpg"/>
